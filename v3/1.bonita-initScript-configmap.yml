@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bonita-init-script
+data:
+  script.sh: |
+    #!/bin/bash
+    # Path to the log4j2-loggers.xml and log4j2-appenders.xml files
+    echo "Im working"
+    LOGGERS_XML="/opt/bonita/conf/logs/log4j2-loggers.xml"
+    APPENDERS_XML="/opt/bonita/conf/logs/log4j2-appenders.xml"
+
+    # Update log4j2-loggers.xml
+    sed -i 's/level="WARN"/level="INFO"/' "$LOGGERS_XML"
+
+    # Update log4j2-appenders.xml
+    sed -i 's/level="WARN"/level="INFO"/' "$APPENDERS_XML"
+
+    echo "Log verbosity updated successfully."
