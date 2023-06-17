@@ -30,28 +30,56 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: bonita-secret
-                  key: TenantUser
+                  key: TENANT_LOGIN
             - name: TENANT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: bonita-secret
-                  key: TenantPassword
+                  key: TENANT_PASSWORD
+
             - name: DB_HOST
-              value: bonita-postgres-service
+              valueFrom:
+                configMapKeyRef:
+                  name: bonita-config
+                  key: DB_HOST
+
             - name: DB_VENDOR
-              value: postgres
+              valueFrom:
+                configMapKeyRef:
+                  name: bonita-config
+                  key: DB_VENDOR
+
             - name: DB_NAME
-              value: bonita
+              valueFrom:
+                configMapKeyRef:
+                  name: bonita-config
+                  key: DB_NAME
+
             - name: DB_USER
-              value: bonita
+              valueFrom:
+                secretKeyRef:
+                  name: bonita-secret
+                  key: DB_USER
             - name: DB_PASS
-              value: bpm
+              valueFrom:
+                secretKeyRef:
+                  name: bonita-secret
+                  key: DB_PASS
             - name: BIZ_DB_NAME
-              value: business_data
+              valueFrom:
+                configMapKeyRef:
+                  name: bonita-config
+                  key: BIZ_DB_NAME
             - name: BIZ_DB_USER
-              value: business_data
+              valueFrom:
+                secretKeyRef:
+                  name: bonita-secret
+                  key: BIZ_DB_USER
             - name: BIZ_DB_PASS
-              value: bpm
+              valueFrom:
+                secretKeyRef:
+                  name: bonita-secret
+                  key: BIZ_DB_PASS
           volumeMounts:
             - name: pre-install
               mountPath: /opt/custom-init.d/

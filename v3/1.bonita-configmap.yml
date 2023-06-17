@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bonita-config
+data:
+  DB_HOST: bonita-postgres-service
+  DB_VENDOR: postgres
+  DB_NAME: bonita
+  BIZ_DB_NAME: business_data
+  
